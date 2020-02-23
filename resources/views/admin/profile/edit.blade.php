@@ -24,26 +24,36 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
-                        @if(profiles_form->gender =='male')
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="male">
-                          <label class="form-check-label" for="male">男性</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="female">
-                          <label class="form-check-label" for="female">女性</label>
-                        </div>
+                        @if($profiles_form->gender == 'male' )
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gender" id="male" checked>
+                              <label class="form-check-label" for="male">男性</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gender" id="female">
+                              <label class="form-check-label" for="female">女性</label>
+                            </div>
+                        @else
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gender" id="male">
+                              <label class="form-check-label" for="male">男性</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gender" id="female"checked>
+                              <label class="form-check-label" for="female">女性</label>
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">趣味</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="hobby" value="{{ old('hobby') }}">
+                            <input type="text" class="form-control" name="hobby" value="{{ $profiles_form->hobby }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介欄</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ old('body') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="20">{{ $profiles_form->introduction }}</textarea>
                         </div>
                     </div>
                     {{ csrf_field() }}

@@ -45,7 +45,7 @@ class ProfileController extends Controller
         if (empty($profiles)) {
             abort(404);    
         }
-        return view('admin.profile.edit', ['profile_form' => $profiles]);
+        return view('admin.profile.edit', ['profiles_form' => $profiles]);
     }
     
     public function update(Request $request)
