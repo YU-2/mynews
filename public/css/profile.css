@@ -1,8 +1,12 @@
 body {
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000;
+  background-color: #0090D2;
   color: #fff;
+}
+
+.tekitou {
+  margin-bottom: 20px;
 }
 
 .navbar-laravel {
