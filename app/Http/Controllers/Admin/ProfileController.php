@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでProfile Modelが扱えるようになる
 use App\Profile;
 
+use App\History2;
+
+use Carbon\Carbon;
+
+
 class ProfileController extends Controller
 {
     //
@@ -33,13 +38,25 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
     
-    public function edit()
-    {
+    public function edit(Request $request)
+    {   
         return view('admin.profile.edit');
     }
     
-    public function update()
+    public function update(Request $request)
     {
+        $this->validate($request, Profile::$rules);
+        $profiles = Profile::find($request->id);
+        $profiles_form = $request->all();
+        
+        unset($profiles_form['_token']);
+        $profiles->fill($profiles_form)->save();
+        
+        $history2 = new History2;
+        $history2->profiles_id = $profiles->id;
+        $history2->edited_at = Carbon::now();
+        $history2->save();
+        
         return redirect('admin/profile/edit');
     }
 }
