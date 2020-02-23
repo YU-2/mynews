@@ -19,13 +19,14 @@
                     <div class="form-group row">
                         <label class="col-md-2">氏名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="name" value="{{ $profiles_form->name }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
+                        @if(profiles_form->gender =='male')
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="male" checked>
+                          <input class="form-check-input" type="radio" name="gender" id="male">
                           <label class="form-check-label" for="male">男性</label>
                         </div>
                         <div class="form-check">
@@ -42,7 +43,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介欄</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="20">{{ old('body') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="20">{{ old('body') }}</textarea>
                         </div>
                     </div>
                     {{ csrf_field() }}
@@ -53,8 +54,8 @@
                     <div class="col-md-4 mx-auto">
                         <h2>編集履歴</h2>
                         <ul class="list-group">
-                            @if ($profiles_form->histories != NULL)
-                                @foreach ($profiles_form->histories as $history2)
+                            @if ($profiles_form->histories2 != NULL)
+                                @foreach ($profiles_form->histories2 as $history2)
                                     <li class="list-group-item">{{ $history2->edited_at }}</li>
                                 @endforeach
                             @endif

@@ -40,7 +40,12 @@ class ProfileController extends Controller
     
     public function edit(Request $request)
     {   
-        return view('admin.profile.edit');
+        // Profile Modelからデータを取得する
+        $profiles = Profile::find($request->id);
+        if (empty($profiles)) {
+            abort(404);    
+        }
+        return view('admin.profile.edit', ['profile_form' => $profiles]);
     }
     
     public function update(Request $request)
