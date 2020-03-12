@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでProfile Modelが扱えるようになる
 use App\Profile;
 
-use App\History2;
+use App\ProfileHistory;
 
 use Carbon\Carbon;
 
@@ -45,7 +45,7 @@ class ProfileController extends Controller
         if (empty($profiles)) {
             abort(404);    
         }
-        return view('admin.profile.edit', ['profiles_form' => $profiles]);
+        return view('admin.profile.edit', ['$profiles_form' => $profiles]);
     }
     
     public function update(Request $request)
@@ -57,11 +57,11 @@ class ProfileController extends Controller
         unset($profiles_form['_token']);
         $profiles->fill($profiles_form)->save();
         
-        $history2 = new History2;
-        $history2->profiles_id = $profiles->id;
-        $history2->edited_at = Carbon::now();
-        $history2->save();
+        $profilehistory = new ProfileHistory;
+        $profilehistory->profiles_id = $profiles->id;
+        $profilehistory->edited_at = Carbon::now();
+        $profilehistory->save();
         
-        return view('admin.profile.edit', ['profiles_form' => $profiles]);
+        return view('admin.profile.create');
     }
 }
