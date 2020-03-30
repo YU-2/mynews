@@ -1,8 +1,6 @@
-{{-- layouts/profile.blade.phpを読み込む --}}
 @extends('layouts.profile')
-{{-- profile.blade.phpの@yield('title')に'プロフィールの新規作成'を埋め込む --}}
+
 @section('title', 'プロフィールの編集')
-{{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class="container">
         <div class="row">
@@ -19,41 +17,23 @@
                     <div class="form-group row">
                         <label class="col-md-2">氏名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ $profiles_form->name }}">
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
-                        @if($profiles_form->gender == 'male' )
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gender" id="male" checked>
-                              <label class="form-check-label" for="male">男性</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gender" id="female">
-                              <label class="form-check-label" for="female">女性</label>
-                            </div>
-                        @else
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gender" id="male">
-                              <label class="form-check-label" for="male">男性</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="gender" id="female"checked>
-                              <label class="form-check-label" for="female">女性</label>
-                            </div>
-                        @endif
+                         <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender }}">
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">趣味</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="hobby" value="{{ $profiles_form->hobby }}">
+                            <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介欄</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ $profiles_form->introduction }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="20">{{ $profile_form->introduction }}</textarea>
                         </div>
                     </div>
                     {{ csrf_field() }}
@@ -64,8 +44,8 @@
                     <div class="col-md-4 mx-auto">
                         <h2>編集履歴</h2>
                         <ul class="list-group">
-                            @if ($profiles_form->profile_histories != NULL)
-                                @foreach ($profiles_form->profile_histories as $profile_history)
+                            @if ($profile_form->profile_histories != NULL)
+                                @foreach ($profile_form->profile_histories as $profile_history)
                                     <li class="list-group-item">{{ $profile_history->edited_at }}</li>
                                 @endforeach
                             @endif
